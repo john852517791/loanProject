@@ -10,8 +10,8 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/loan?serverTimezone=GMT%2B8&characterEncoding=utf-8
-    username: root
-    password: 123456
+    username: wzy
+    password: 897253809
 
 mybatis-plus: #mybatis
   configuration:

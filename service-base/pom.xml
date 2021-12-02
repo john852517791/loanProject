@@ -16,6 +16,13 @@
             <artifactId>common-part</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>io.springfox</groupId>-->
+<!--            <artifactId>springfox-boot-starter</artifactId>-->
+<!--&lt;!&ndash;            <version>3.0.0</version>&ndash;&gt;-->
+<!--        </dependency>-->
         <!--swagger-->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -26,6 +33,7 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
         </dependency>
+
     </dependencies>
 
 </project>

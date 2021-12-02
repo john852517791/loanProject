@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-12-03
  */
 @RestController
-@RequestMapping("/lend")
+@RequestMapping("/api/core/lend")
 public class LendController {
 
 }
