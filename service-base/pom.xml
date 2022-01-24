@@ -18,21 +18,21 @@
         </dependency>
 
 <!--        &lt;!&ndash; https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter &ndash;&gt;-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+<!--            <version>3.0.0</version>-->
+        </dependency>
+        <!--swagger-->
 <!--        <dependency>-->
 <!--            <groupId>io.springfox</groupId>-->
-<!--            <artifactId>springfox-boot-starter</artifactId>-->
-<!--&lt;!&ndash;            <version>3.0.0</version>&ndash;&gt;-->
+<!--            <artifactId>springfox-swagger2</artifactId>-->
 <!--        </dependency>-->
-        <!--swagger-->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-        </dependency>
-        <!--swagger ui-->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-        </dependency>
+<!--        &lt;!&ndash;swagger ui&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>io.springfox</groupId>-->
+<!--            <artifactId>springfox-swagger-ui</artifactId>-->
+<!--        </dependency>-->
 
     </dependencies>
 
