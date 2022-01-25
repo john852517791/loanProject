@@ -130,7 +130,7 @@ TableLogic
 
 
 
-1、导包，新版本是swagger 的springboot starter
+## 1、导包，新版本是swagger 的springboot starter
 
 旧版本的配置
 
@@ -164,7 +164,7 @@ TableLogic
 </dependency>
 ```
 
-2、配置
+## 2、配置
 
 3.0.0的starter版本后只需要configuration一个注解配置即可
 
@@ -201,7 +201,7 @@ public class Swagger2Config{
 
 
 
-3、在controller中使用
+## 3、在controller中使用
 
 ```java
 @Api(tags = "积分等级管理")
@@ -254,7 +254,7 @@ public class AdminIntegralGradeController {
 
 
 
-4、访问swagger
+## 4、访问swagger
 
 旧版本需要在端口号后加/swagger-ui.html来访问
 
@@ -262,7 +262,7 @@ public class AdminIntegralGradeController {
 
 新版本则是
 
-[如]: http://localhost:8110/swagger-ui
+[如]: http://localhost:8110/swagger-ui/
 
 
 
@@ -320,6 +320,21 @@ public class R {
         return r;
     }
 
+    //    成功的返回结果
+    public static R ok(){
+        R r = new R();
+        r.setCode(ResponseEnum.SUCCESS.getCode());
+        r.setMessage(ResponseEnum.SUCCESS.getMessage());
+        return r;
+    }
+//    失败的返回结果
+    public static R error(){
+        R r = new R();
+        r.setCode(ResponseEnum.ERROR.getCode());
+        r.setMessage(ResponseEnum.ERROR.getMessage());
+        return r;
+    }
+    
 //    将查询数据放到R返回对象中
     public R Data(String key,Object value){
         this.data.put(key,value);
@@ -347,7 +362,217 @@ public class R {
 
 
 
+## 统一返回结果的CRUD
+
+主要的改变就在于判断上面
+
+如果调用service方法返回不为空则返回R成功
+
+如下
+
+```java
+@ApiOperation("根据id获取积分等级")
+@GetMapping("/get/{id}")
+public R getById(@PathVariable long id){
+    IntegralGrade byId = integralGradeService.getById(id);
+    if(byId!=null){
+        return R.ok().Data("record",byId).message("获取成功");
+    }else {
+        return R.error().message("数据获取失败");
+    }
+}
+```
+
+增——postmapping
+
+删——deletemapping
+
+改——putmapping
+
+查——getmapping
 
 
 
 
+
+# 统一异常处理
+
+## 针对不同异常类的处理模板
+
+```java
+@Slf4j
+@RestControllerAdvice
+public class UnifiedExceptionalHandler {
+
+
+    @ExceptionHandler({Exception.class})
+//    指定针对哪一类异常
+    public R handleException(Exception e){
+//        可对此方法进行多次重载，修改参数为所需要特殊处理的异常类型
+        log.error(e.getMessage(),e);
+//        日志打印异常信息
+        return R.error();
+//        可返回定制化的异常信息,如下
+//        return R.setResult(ResponseEnum.ALIYUN_SMS_ERROR);
+    }
+	@ExceptionHandler(IOException.class)
+    public R handleException(IOException e){
+        log.error(e.getMessage(),e);
+        return R.setResult(ResponseEnum.EXPORT_DATA_ERROR);
+    }
+
+}
+```
+
+
+
+## 自定义异常
+
+目标——使用一个或较少的异常类，以捕获和显示所有的异常信息
+
+how to do——创建自定义异常类（为运行时异常runtimeexception），在程序中出现异常的时候抛出这个异常对象，并在统一异常处理器中捕获自定义异常对象
+
+流程：在controller中判断某种条件，若条件xxx则抛出自定义异常，然后用异常处理器来捕获这个自定义异常
+
+定义一个BusinessException类
+
+```java
+@Data
+@NoArgsConstructor
+public class BusinessException extends RuntimeException {
+
+
+    //状态码
+    private Integer code;
+
+    //错误消息
+    private String message;
+
+    /**
+     *
+     * @param message 错误消息
+     */
+    public BusinessException(String message) {
+        this.message = message;
+    }
+
+    /**
+     *
+     * @param message 错误消息
+     * @param code 错误码
+     */
+    public BusinessException(String message, Integer code) {
+        this.message = message;
+        this.code = code;
+    }
+
+    /**
+     *
+     * @param message 错误消息
+     * @param code 错误码
+     * @param cause 原始异常对象
+     */
+    public BusinessException(String message, Integer code, Throwable cause) {
+        super(cause);
+        this.message = message;
+        this.code = code;
+    }
+
+    /**
+     *
+     * @param resultCodeEnum 接收枚举类型
+     */
+    public BusinessException(ResponseEnum resultCodeEnum) {
+        this.message = resultCodeEnum.getMessage();
+        this.code = resultCodeEnum.getCode();
+    }
+
+    /**
+     *
+     * @param resultCodeEnum 接收枚举类型
+     * @param cause 原始异常对象
+     */
+    public BusinessException(ResponseEnum resultCodeEnum, Throwable cause) {
+        super(cause);
+        this.message = resultCodeEnum.getMessage();
+        this.code = resultCodeEnum.getCode();
+    }
+
+
+}
+```
+
+主要是写构造类，将之前写的枚举类型作为形参传入
+
+
+
+在controller中抛出异常
+
+```java
+ @ApiOperation("新增积分等级")
+    @PostMapping("/save")
+    public R save(
+            @ApiParam(value = "积分等级对象",required = true)
+            @RequestBody IntegralGrade integralGrade){
+
+//        抛异常示例
+        if(integralGrade.getBorrowAmount()==null){
+            throw  new BusinessException(ResponseEnum.BORROW_AMOUNT_NULL_ERROR);
+        }
+        
+
+
+        if(integralGradeService.save(integralGrade)){
+            return R.ok().message("添加成功");
+        }else {
+            return R.error().message("添加失败");
+        }
+    }
+```
+
+
+
+异常处理器处理
+
+```java
+@Slf4j
+@RestControllerAdvice
+public class UnifiedExceptionalHandler {
+
+
+    @ExceptionHandler(value = BusinessException.class)
+    public R handleException(BusinessException e){
+        log.error(e.getMessage(),e);
+        return R.error().message(e.getMessage()).code(e.getCode());
+    }
+}
+```
+
+## 断言assert
+
+对逻辑判断的进一步封装【封装为静态方法】
+
+如
+
+```java
+@Slf4j
+public class Assert {
+    /**
+     * 断言对象不为空
+     * 如果对象obj为空，则抛出异常
+     * @param obj 待判断对象
+     */
+    public static void notNull(Object obj, ResponseEnum responseEnum) {
+        if (obj == null) {
+            log.info("obj is null...............");
+            throw new BusinessException(responseEnum);
+        }
+    }
+}
+```
+
+这样一来上面的if判断就可以进一步缩减为
+
+```java
+Assert.notNull(integralGrade.getBorrowAmount(),ResponseEnum.BORROW_AMOUNT_NULL_ERROR);
+```
