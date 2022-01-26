@@ -576,3 +576,183 @@ public class Assert {
 ```java
 Assert.notNull(integralGrade.getBorrowAmount(),ResponseEnum.BORROW_AMOUNT_NULL_ERROR);
 ```
+
+## 阶段分类异常
+
+![image-20220126171136425](C:\Users\85251\AppData\Roaming\Typora\typora-user-images\image-20220126171136425.png)
+
+处理controller之前的异常就需要另外添加处理
+
+```java
+/**
+ * Controller上一层相关异常
+ */
+@ExceptionHandler({
+        NoHandlerFoundException.class,
+        HttpRequestMethodNotSupportedException.class,
+        HttpMediaTypeNotSupportedException.class,
+        MissingPathVariableException.class,
+        MissingServletRequestParameterException.class,
+        TypeMismatchException.class,
+        HttpMessageNotReadableException.class,
+        HttpMessageNotWritableException.class,
+        MethodArgumentNotValidException.class,
+        HttpMediaTypeNotAcceptableException.class,
+        ServletRequestBindingException.class,
+        ConversionNotSupportedException.class,
+        MissingServletRequestPartException.class,
+        AsyncRequestTimeoutException.class
+})
+public R handleServletException(Exception e) {
+    log.error(e.getMessage(), e);
+    //SERVLET_ERROR(-102, "servlet请求异常"),
+    return R.error().message(ResponseEnum.SERVLET_ERROR.getMessage()).code(ResponseEnum.SERVLET_ERROR.getCode());
+}
+```
+
+
+
+
+
+# 日志处理
+
+
+
+## 日志级别
+
+springboot 的yml配置中
+
+```yml
+logging:
+  level:
+    root: error
+```
+
+日志级别由低到高为
+
+trace——debug——info——warn——error
+
+还有all和off
+
+
+
+## logback框架
+
+需要配置一个xml文件，名为logback-spring
+
+这个名字springboot框架会自动识别
+
+### property
+
+xml文件中需要配置一些property，做一些映射关系，为主要配置做准备
+
+```xml
+<property name="log.path" value="D:/workspace/loanProject/service-core/src/main/resources/log" />
+
+<!--控制台日志格式：彩色日志-->
+<!-- magenta:洋红 -->
+<!-- boldMagenta:粗红-->
+<!-- cyan:青色 -->
+<!-- white:白色 -->
+<!-- magenta:洋红 -->
+<property name="CONSOLE_LOG_PATTERN"
+          value="%yellow(%date{yyyy-MM-dd HH:mm:ss}) %highlight([%-5level]) %green(%logger) %msg%n"/>
+
+<!--文件日志格式-->
+<property name="FILE_LOG_PATTERN"
+          value="%date{yyyy-MM-dd HH:mm:ss} [%-5level] %thread %file:%line %logger %msg%n" />
+
+<!--编码-->
+<property name="ENCODING"  value="UTF-8" />
+```
+
+### 控制台日志
+
+控制台日志输出的配置标签，其中${}中就是输入之前property配的 name
+
+```xml
+<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+        <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        <charset>${ENCODING}</charset>
+    </encoder>
+</appender>
+```
+
+
+
+### log文件输出
+
+```xml
+<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <file>${log.path}/log.log</file>
+    <append>true</append>
+    <encoder>
+        <pattern>${FILE_LOG_PATTERN}</pattern>
+        <charset>${ENCODING}</charset>
+    </encoder>
+</appender>
+```
+
+### 环境配置选择
+
+分开发环境、测试环境以及生产环境
+
+不同环境可以对日志进行区别处理
+
+主要判断依据是yml配置文件中的spring.profiles.active的属性值【即与springProfile标签的name属性对应】
+
+ref属性对应的使之前appender标签的name属性
+
+```xml
+<!-- 开发环境和测试环境 -->
+<springProfile name="dev,test">
+    <logger name="com.atguigu" level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="ROLLING_FILE" />
+    </logger>
+</springProfile>
+
+<!-- 生产环境 -->
+<springProfile name="prod">
+    <logger name="com.atguigu" level="ERROR">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </logger>
+</springProfile>
+```
+
+### 滚动日志记录
+
+当服务开启，日志就会一直 生成，日志文件也会越来越大，因此就需要策略来控制日志文件大小
+
+这里使用的策略是前一天的日志都会被归档到另外一个日志文件中，此外还可以设置如果log文件大小超过某个阈值，就将过去的日志归档到另外一个文件中【使内存中的日志文件大小稳定在某个阈值之下】
+
+
+
+```xml
+<appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+    <!--  要区别于其他的appender中的文件名字  -->
+    <file>${log.path}/log-rolling.log</file>
+    <encoder>
+        <pattern>${FILE_LOG_PATTERN}</pattern>
+        <charset>${ENCODING}</charset>
+    </encoder>
+
+
+    <!-- 设置滚动日志记录的滚动策略 -->
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <!-- 日志归档路径以及格式 -->
+        <fileNamePattern>${log.path}/info/log-rolling-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+        <!--归档日志文件保留的最大数量-->
+        <maxHistory>15</maxHistory>
+
+        <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+            <maxFileSize>1KB</maxFileSize>
+        </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+
+</appender>
+```
+
