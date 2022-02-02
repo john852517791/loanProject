@@ -756,3 +756,825 @@ ref属性对应的使之前appender标签的name属性
 </appender>
 ```
 
+
+
+# npm
+
+npm init
+
+npm install
+
+npm rum [scriptsName]
+
+# 前端页面
+
+## 修改记录
+
+### 导航栏
+
+想修改这一部分的数据
+
+![image-20220126230345968](C:\Users\85251\AppData\Roaming\Typora\typora-user-images\image-20220126230345968.png)
+
+按照以下目录寻找
+
+![image-20220126230300776](C:\Users\85251\AppData\Roaming\Typora\typora-user-images\image-20220126230300776.png)
+
+修改即可
+
+## 前端框架的目录结构
+
+![image-20220127111913621](C:\Users\85251\AppData\Roaming\Typora\typora-user-images\image-20220127111913621.png)
+
+### node_modules
+
+首先是node_modules，这个文件夹相当于java项目中的jar包文件夹
+
+把项目pull下来之后只需要在命令行中执行npm install就可以自动生成
+
+### src
+
+然后是最主要的src文件夹，我们需要写的东西全在这个文件夹中
+
+#### utils
+
+此文件夹用于存放一些公共配置和工具类，如baseurl，拦截器等等
+
+
+
+#### api
+
+这个文件夹是存放与后端交互的api，即controller中所写的url
+
+样例如下
+
+引入的request中含baseURL以及axios
+
+写法如下，method即为mapping的属性【get、post、put、delete...】
+
+```js
+
+// 引入axios的初始化模块
+import request from '@/utils/request'
+
+
+export default{
+    // 定义模块成员
+    
+    // list方法：获取积分等级列表 
+    list(){
+        // 调用axios初始化模块，发送ajax请求
+        return request({
+            url: '/admin/integralGrade/list',
+            method: 'get'
+        })
+    },
+    // 根据id删除积分区间
+    deleteById(id){
+        // 调用axios初始化模块，发送ajax请求
+        return request({
+            url: '/admin/integralGrade/delete/'+id,
+            method: 'delete'
+        })
+    },
+
+    // 新增积分区间
+    save(integralGrade){
+        // 调用axios初始化模块，发送ajax请求
+        return request({
+            url: '/admin/integralGrade/save',
+            method: 'post',
+            data: integralGrade
+        })
+    }
+}
+```
+
+⭐api会被views所调用
+
+#### views
+
+src之下首先找到views文件夹，需要调用api且显示数据
+
+即下图画圈部分所要展示的东西
+
+![image-20220127113135651](C:\Users\85251\AppData\Roaming\Typora\typora-user-images\image-20220127113135651.png)
+
+
+
+此类文件的基本结构如下
+
+```vue
+<template>
+    <div>
+    </div>
+</template>
+
+
+
+<script>
+export default {
+    data () {
+        return {
+            
+        }
+    },
+    created () {
+        
+    },
+
+    methods: {
+        
+    }
+
+}
+</script>
+
+<style scoped>
+
+</style>
+
+
+
+
+```
+
+
+
+如列表展示功能——需要获取数据，显示数据
+
+获取数据即写方法调用API，
+
+显示数据即写html标签调用模板
+
+
+
+#### router
+
+router文件夹，其中有一个index.js文件
+
+其中内容管理的是侧边栏，以及侧边栏标签与内容的绑定
+
+如下的配置
+
+```js
+ {
+    path: '/admin/integral-grade',
+    component: Layout,
+    redirect: '/admin/integral-grade/list',
+    name: 'adminIntegralGrade',
+    meta: { title: '积分等级', icon: 'el-icon-s-grid' },
+    alwaysShow: true,//如果父节点下只有一个子节点的时候就可以选择是否显示父节点
+    children: [
+      {
+        path: 'list',
+        name: 'adminIntegralGradeList',
+        component: () => import('@/views/admin/integral-grade/list'),
+        meta: { title: '积分等级列表', icon: '' }
+      },
+      {
+        path: 'create',
+        name: 'adminIntegralGradeCreate',
+        component: () => import('@/views/admin/integral-grade/form'),
+        meta: { title: '新增积分等级', icon: '' }
+      },
+      {
+        path: 'edit/:id',
+        name: 'adminIntegralGradeEdit',
+        component: () => import('@/views/admin/integral-grade/form'),
+        meta: { title: '修改积分等级', icon: '' },
+        hidden: true
+      }
+    ]
+  },
+```
+
+实际效果如下
+
+![image-20220129151755166](C:\Users\85251\AppData\Roaming\Typora\typora-user-images\image-20220129151755166.png)
+
+
+
+调用关系大致如下
+
+
+
+![image-20220129143804911](C:\Users\85251\AppData\Roaming\Typora\typora-user-images\image-20220129143804911.png)
+
+
+
+
+
+## 目录进一步分析
+
+### 页面入口
+
+public/index.html
+
+所有的页面都是依靠这个页面，不同的显示效果则是依靠js动态渲染
+
+### 引用
+
+src/main.js
+
+这个文件主要是为了引入一些引用文件
+
+【类似于java类中的import】
+
+以及创建唯一的vue对象且绑定id为app的标签
+
+```vue
+new Vue({
+  el: '#app',
+  router,//引入路由模块
+  store,
+  render: h => h(App)//引用App所指的文件
+})
+```
+
+### 路由
+
+在上面所指的App是同目录下的App.vue文件
+
+因为App.vue文件中以App的名字导出了模块
+
+模块中为router-view，即路由出口
+
+
+
+路由出口需要与路径绑定
+
+则在src/router文件夹下的文件中，定义了路径与页面展示的绑定
+
+src/views文件夹下即为页面展示
+
+
+
+### layout
+
+前端工程——个人理解就是将一个页面拆碎，以组件的形式一个个再动态的拼接
+
+当我们访问list表单的时候
+
+页面总共由三部分组成
+
+![image-20220129170138432](C:\Users\85251\AppData\Roaming\Typora\typora-user-images\image-20220129170138432.png)
+
+
+
+而在工程中的呈现即App调用Layout，layout再去调用自己的三个部件，之下的三个部件再去调用各自的所属部件，最终渲染出页面，即树形结构
+
+
+
+![image-20220129170046447](C:\Users\85251\AppData\Roaming\Typora\typora-user-images\image-20220129170046447.png)
+
+
+
+
+
+
+
+
+
+# Nginx配置
+
+修改nginx-1.20.2\conf\nginx.conf 文件，在server配置中添加如下三个配置
+
+访问nginx为http://localhost:80 ，nginx会将不同的url请求代理分配给各自的端口号，如url中带admin的是后台管理系统，后端部署的服务端口是8110，则带admin的url访问时候nginx会更改80端口为8110
+
+​		location ~ /admin/ {
+​            proxy_pass http://localhost:8110;	
+​        }
+​        location ~ /sms/ {
+​            proxy_pass http://localhost:8120;	
+​        }
+​        location ~ /oss/ {
+​            proxy_pass http://localhost:8130;	
+​        }
+
+```conf
+ server {
+        listen       80;
+        server_name  localhost;
+
+
+        location ~ /admin/ {
+            proxy_pass http://localhost:8110;	
+        }
+        location ~ /sms/ {
+            proxy_pass http://localhost:8120;	
+        }
+        location ~ /oss/ {
+            proxy_pass http://localhost:8130;	
+        }
+
+    location / {
+        root   html;
+        index  index.html index.htm;
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   html;
+    }
+
+}
+```
+
+启动nginx直接在命令行中start nginx即可
+
+
+
+# 前端CRUD
+
+查询的表单显示在页面A，修改和新增共用同一个页面B
+
+删除和修改按钮显示在A中
+
+则需要编写两个页面【form表单和list展示】
+
+配置路由如下，三个路由，其中修改路由为隐藏路由
+
+```js
+
+  {
+    path: '/admin/integral-grade',
+    component: Layout,
+    redirect: '/admin/integral-grade/list',
+    name: 'adminIntegralGrade',
+    meta: { title: '积分等级', icon: 'el-icon-s-grid' },
+    alwaysShow: true,//如果父节点下只有一个子节点的时候就可以选择是否显示父节点
+    children: [
+      {
+        path: 'list',
+        name: 'adminIntegralGradeList',
+        component: () => import('@/views/admin/integral-grade/list'),
+        meta: { title: '积分等级列表', icon: '' }
+      },
+      {
+        path: 'create',
+        name: 'adminIntegralGradeCreate',
+        component: () => import('@/views/admin/integral-grade/form'),
+        meta: { title: '新增积分等级', icon: '' }
+      },
+      {
+        path: 'edit/:id',
+        name: 'adminIntegralGradeEdit',
+        component: () => import('@/views/admin/integral-grade/form'),
+        meta: { title: '修改积分等级', icon: '' },
+        hidden: true
+      }
+    ]
+  }
+```
+
+
+
+
+
+基本步骤：
+
+​	1、写api
+
+​	2、写axios请求
+
+​	3、写html显示数据
+
+api文件的基本框架
+
+```java
+// 引入axios的初始化模块
+import request from '@/utils/request'
+
+
+export default{
+    // 定义模块成员
+}
+```
+
+axios请求和数据显示是在同一个view文件，框架为
+
+```vue
+
+<template>
+    <div class="app-container">
+    
+    </div>
+</template>
+
+<script>
+
+export default {
+    data () {
+        return {
+        }
+    },
+    created () {
+    },
+    methods: {
+
+    }
+}
+</script>
+
+<style scoped>
+
+</style>
+```
+
+
+
+## 查询并展示所有
+
+### 1、api的编写
+
+```js
+	list(){
+        // 调用axios初始化模块，发送ajax请求
+        return request({
+            url: '/admin/integralGrade/list',
+            method: 'get'
+        })
+    }
+```
+
+### 2、调用api发送axios请求
+
+先导入api模块
+
+```vue
+import integralGradeApi from '@/api/admin/integral-grade'
+```
+
+需要定义的东西包含：定义参数、定义函数、确定在什么阶段来调用此函数
+
+⭐分析思路
+
+因为是展示所有列表，因此返回值为列表，定义为list
+
+函数无形参，只需要执行api方法即可，查询成功后将response的data传到list中
+
+在视图渲染前调用此函数【created】
+
+```vue
+export default {
+    data () {
+        return {
+            // 定义list
+            list: []
+        }
+    },
+    created () {
+        this.fetchData()
+    },
+
+    methods: {
+        fetchData(){
+            integralGradeApi.list().then(response=>{
+                this.list=response.data.list
+            })
+        }
+    }
+}
+```
+
+### 3、写html显示数据
+
+
+
+```html
+		<el-table :data="list" border stripe>
+            <el-table-column type="index" width="50"/>
+            <el-table-column prop="borrowAmount" label="借款额度"/>
+            <el-table-column prop="integralStart" label="区间积分最小值"/>
+            <el-table-column prop="integralEnd" label="区间积分最大值"/>
+        </el-table>
+```
+
+运用element框架，prop绑定各项数据的name即可
+
+
+
+## 删除单条信息
+
+### 	1、写api
+
+```js
+// 根据id删除积分区间
+    deleteById(id){
+        // 调用axios初始化模块，发送ajax请求
+        return request({
+            url: '/admin/integralGrade/delete/'+id,
+            method: 'delete'
+        })
+    }
+```
+
+
+
+### 	2、写axios请求
+
+```vue
+
+        deleteById(id){
+
+            this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+                }).then(() => {
+                    integralGradeApi.deleteById(id).then(response=>{
+                        this.$message({
+                        showClose: true,
+                        message: response.message,
+                        type: 'success'
+                    })
+                    this.fetchData()
+                    }).catch(err=>{
+                        this.$message({
+                            showClose: true,
+                            message: response.message,
+                            type: 'error'
+                            })
+                        })
+                }).catch(() => {
+                    this.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                    });          
+                });
+            // console.log(id);
+            
+        }
+```
+
+
+
+删除操作需要用户多一步确认操作，确定后再执行删除操作，删除操作也分成功与失败，再进行判断成功失败如何响应
+
+
+
+
+
+### 	3、写html显示数据
+
+```html
+        <el-table :data="list" border stripe>
+            <el-table-column type="index" width="50"/>
+            <el-table-column prop="borrowAmount" label="借款额度"/>
+            <el-table-column prop="integralStart" label="区间积分最小值"/>
+            <el-table-column prop="integralEnd" label="区间积分最大值"/>
+            <el-table-column label="操作">
+                <template slot-scope="scope">
+                    <el-button type="danger" size="mini" icon="el-icon-delete"
+                        @click="deleteById(scope.row.id)"
+                    >
+                        删除
+                    </el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+```
+
+只需要加一个删除按钮，按钮需要传入一个id参数
+
+
+
+
+
+## 新增信息
+
+### 	1、写api
+
+```js
+// 新增积分区间
+    save(integralGrade){
+        // 调用axios初始化模块，发送ajax请求
+        return request({
+            url: '/admin/integralGrade/save',
+            method: 'post',
+            data: integralGrade
+        })
+    }
+```
+
+
+
+### 	2、写axios请求
+
+初始化一个对象【新增的数据】——用于接受存储对象
+
+初始化一个布尔类型的变量——初始化为false，当save方法被调用后会被设为true，用于禁用保存按钮，防止用户多次点击按钮导致数据有无效新增
+
+
+
+方法——调用save的api，调用完之后就返回列表展示页面
+
+在保存按钮点击时调用save方法
+
+```vue
+export default {
+    data () {
+        return {
+            integralGrade:{},// 初始化数据
+            saveBtnDisabled: false // 保存按钮是否禁用，防止表单重复提交
+        }
+    },
+    created () {
+    },
+    methods: {
+        save(){
+            integralGradeApi.save(this.integralGrade).then(response=>{
+                this.$message.success(response.message)
+                // 表单提交完后自动跳转到列表展示页面
+                this.$router.push('/admin/integral-grade/list')
+            })
+        }
+    }
+}
+```
+
+
+
+### 	3、写html显示数据
+
+```html
+        <el-form label-width="120px">
+            <el-form-item label="借款额度">
+                <el-input-number v-model="integralGrade.borrowAmount" :min="0"/>
+            </el-form-item>
+            <el-form-item label="积分区间最小值">
+                <el-input-number v-model="integralGrade.integralStart" :min="0"/>
+            </el-form-item>
+            <el-form-item label="积分区间最大值">
+                <el-input-number v-model="integralGrade.integralEnd" :min="0"/>
+            </el-form-item>
+            <el-form-item>
+                <el-button 
+                    :disabled="saveBtnDisabled"
+                    type="primary"
+                    @click="save()"
+                >
+                    保存
+                </el-button>
+            </el-form-item>
+        </el-form>
+```
+
+
+
+
+
+## 修改信息
+
+### 	1、写api
+
+```js
+// 回显数据所用的根据id查询积分区间
+    getById(id){
+        // 调用axios初始化模块，发送ajax请求
+        return request({
+            url: '/admin/integralGrade/get/'+id,
+            method: 'get'
+        })
+    },
+
+    // 根据id修改积分区间内容
+    updateById(integralGrade){
+        return request({
+            url: '/admin/integralGrade/update',
+            method: 'put',
+            data: integralGrade
+        })
+    }
+```
+
+
+
+### 	2、写axios请求
+
+修改也需要初始化一个对象，不过由于修改和新增使用同一个页面，因此可省略
+
+修改操作可以分解为——前端点击修改按钮触发修改路由，页面跳转到修改页面，页面数据回显，修改保存，返回列表页面
+
+我们设置的修改路由中可以穿一个id参数，跳转到form页面时可根据这个id的参数是否为空来判断是修改还是新增
+
+因此可将update和save方法各自写好后，用一个逻辑判断函数来判断调用save还是update
+
+```vue
+export default {
+    data () {
+        return {
+            integralGrade:{},// 初始化数据
+            saveBtnDisabled: false // 保存按钮是否禁用，防止表单重复提交
+        
+        }
+    },
+    created () {
+        // 路由router中存在id的时候调用这个函数
+        if(this.$route.params.id){
+            this.fetchById(this.$route.params.id)
+        }
+    },
+    methods: {
+
+        fetchById(id){
+            integralGradeApi.getById(id).then(response=>{
+                this.integralGrade= response.data.record
+            })
+        },
+
+        saveOrUpdate(){
+            // 保存按钮被按了一次之后就禁用，防止数据误增
+            this.saveBtnDisabled=true
+            
+            // 若实体中的id不为空，则调用修改函数
+            if(this.integralGrade.id){
+                this.update()
+            }else{
+                // 若为空则调用新增函数
+                this.save()
+            }
+
+        },
+
+
+        save(){
+            integralGradeApi.save(this.integralGrade).then(response=>{
+                this.$message.success(response.message)
+                // 表单提交完后自动跳转到列表展示页面
+                this.$router.push('/admin/integral-grade/list')
+            })
+        },
+        update(){
+            integralGradeApi.updateById(this.integralGrade).then(response=>{
+                this.$message.success(response.message)
+                // 表单提交完后自动跳转到列表展示页面
+                this.$router.push('/admin/integral-grade/list')
+            })    
+        }
+
+
+
+    }
+}
+```
+
+
+
+### 	3、写html显示数据
+
+html只需要添加展示页面的修改按钮
+
+这个按钮需要兼具路由跳转的功能，还需要传入id值
+
+scope用于传id，router-link标签用于设置路由目的地
+
+```html
+<el-table :data="list" border stripe>
+            <el-table-column type="index" width="50"/>
+            <el-table-column prop="borrowAmount" label="借款额度"/>
+            <el-table-column prop="integralStart" label="区间积分最小值"/>
+            <el-table-column prop="integralEnd" label="区间积分最大值"/>
+            <el-table-column label="操作">
+                <template slot-scope="scope">
+                    <router-link :to="'/admin/integral-grade/edit/'+scope.row.id"
+                        style="margin-right:5px"
+                    >
+                        <el-button type="primary" size="mini" icon="el-icon-edit"
+                            @click="updateById(scope.row.id)"
+                        >
+                            修改
+                        </el-button>
+                    </router-link>
+                        
+                    
+                    <el-button type="danger" size="mini" icon="el-icon-delete"
+                        @click="deleteById(scope.row.id)"
+                    >
+                        删除
+                    </el-button>
+                    
+                </template>
+            </el-table-column>
+        </el-table>
+```
+
+
+
+
+
+
+
+# 数据字典以及easyexel
+
+数据字典——可存多级目录类数据
+
+此处使用二级目录
+
+parentid指的是二级目录项所属的一级目录id
+
+dict_code只有一级目录有
+
+![image-20220130163801955](C:\Users\85251\AppData\Roaming\Typora\typora-user-images\image-20220130163801955.png)
+
