@@ -8,7 +8,11 @@ import com.wzy.loan.core.entity.Dict;
 import com.wzy.loan.core.mapper.DictMapper;
 import com.wzy.loan.core.service.DictService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +20,7 @@ import javax.annotation.Resource;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -26,10 +31,13 @@ import java.util.List;
  * @since 2021-12-03
  */
 @Service
+@Slf4j
 public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements DictService {
 
     @Resource
     private DictMapper dictMapper;
+    @Resource
+    private RedisTemplate redisTemplate;
 
 
     @Override
@@ -59,6 +67,27 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 
     @Override
     public List<Dict> listByParentId(Long parentId) {
+//        引入redis后，先从redis中找，
+//        若redis中没有，则到数据库中查询，
+//        查询后将数据存到redis中
+//        最终返回数据
+
+//        先设计key
+//        多级列表数据，各个级别有各自的parentid，以这个为标识
+
+
+//        尝试从redis中查找
+        try {
+            List<Dict> o = (List<Dict>) redisTemplate.opsForValue().get("srb:admin:dictList:" + parentId);
+            if(o!=null){
+                return o;
+            }
+        } catch (Exception e) {
+            log.error("redis异常"+ ExceptionUtils.getStackTrace(e));
+        }
+
+
+//        redis查找失败后查询数据库
 //        为查询设定条件，where parent_id=？
         QueryWrapper<Dict> dictQueryWrapper = new QueryWrapper<>();
         dictQueryWrapper.eq("parent_id",parentId);
@@ -68,6 +97,16 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 //            若id与其他行数据的parentId相同则设置hasChildren为TRUE
             dict.setHasChildren(hasChildrenOrNot(dict.getId()));
         });
+
+
+//        查询完数据库后将数据存入redis
+        try {
+            log.info("将数据存入redis");
+            redisTemplate.opsForValue().set("srb:admin:dictList:"+parentId,dicts,5, TimeUnit.MINUTES);
+        } catch (Exception e) {
+            log.error("redis异常"+ ExceptionUtils.getStackTrace(e));
+        }
+
         return dicts;
     }
 
