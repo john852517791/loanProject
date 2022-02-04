@@ -1,0 +1,18 @@
+server:
+  port: 8130
+#  端口设置
+
+
+spring:
+  profiles:
+    active: dev
+#    环境设置
+  application:
+    name: service-oss
+#    服务名
+
+cos:
+  endpoint: cos.ap-guangzhou.myqcloud.com
+  keyId: AKIDtd6IDrFMBk35rMbYEengHbdPt62i8F6g
+  keySecret: LPCj00jCQN2QXOyMWQ3OSJtCEzTgcHfm
+  bucketName: wzy-srb-1305802616
