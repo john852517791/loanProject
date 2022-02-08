@@ -1,0 +1,3 @@
+2022-02-08 11:14:23 [INFO ] main StartupInfoLogger.java:55 com.wzy.loan.sms.ServiceSmsApplication Starting ServiceSmsApplication on DESKTOP-ST9KEV1 with PID 14952 (D:\workspace\loanProject\service-message\target\classes started by wzy家 in D:\workspace\loanProject)
+2022-02-08 11:14:23 [INFO ] main SpringApplication.java:655 com.wzy.loan.sms.ServiceSmsApplication The following profiles are active: dev
+2022-02-08 11:14:26 [INFO ] main StartupInfoLogger.java:61 com.wzy.loan.sms.ServiceSmsApplication Started ServiceSmsApplication in 4.05 seconds (JVM running for 5.378)
