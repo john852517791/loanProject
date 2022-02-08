@@ -13,6 +13,6 @@ spring:
 
 cos:
   endpoint: cos.ap-guangzhou.myqcloud.com
-  keyId: AKIDtd6IDrFMBk35rMbYEengHbdPt62i8F6g
-  keySecret: LPCj00jCQN2QXOyMWQ3OSJtCEzTgcHfm
-  bucketName: wzy-srb-1305802616
+  keyId: 
+  keySecret: 
+  bucketName: 
