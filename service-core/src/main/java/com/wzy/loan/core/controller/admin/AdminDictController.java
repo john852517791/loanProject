@@ -5,7 +5,7 @@ import com.alibaba.excel.EasyExcel;
 import com.wzy.common.exception.BusinessException;
 import com.wzy.common.result.R;
 import com.wzy.common.result.ResponseEnum;
-import com.wzy.loan.core.easyExcel.excelDTO;
+import com.wzy.loan.core.pojo.easyExcel.excelDTO;
 import com.wzy.loan.core.service.DictService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,11 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
-import java.util.List;
 
 /**
  * <p>
@@ -34,7 +32,7 @@ import java.util.List;
 @Api(tags = "数据字典管理")
 @CrossOrigin
 @Slf4j
-@RequestMapping("/admin/dict")
+@RequestMapping("/admin/core/dict")
 public class AdminDictController {
 
     @Resource

@@ -6,9 +6,8 @@ package com.wzy.loan.core.controller.admin;/*
  */
 
 import com.wzy.common.exception.Assert;
-import com.wzy.common.exception.BusinessException;
 import com.wzy.common.result.ResponseEnum;
-import com.wzy.loan.core.entity.IntegralGrade;
+import com.wzy.loan.core.pojo.entity.IntegralGrade;
 import com.wzy.loan.core.service.IntegralGradeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,11 +16,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import com.wzy.common.result.R;
-import java.util.List;
 
 @Api(tags = "积分等级管理")
 @CrossOrigin
-@RequestMapping("/admin/integralGrade")
+@RequestMapping("/admin/core/integralGrade")
 @RestController
 public class AdminIntegralGradeController {
 
