@@ -1,6 +1,6 @@
 package com.wzy.loan.core.service.impl;
 
-import com.wzy.loan.core.entity.IntegralGrade;
+import com.wzy.loan.core.pojo.entity.IntegralGrade;
 import com.wzy.loan.core.mapper.IntegralGradeMapper;
 import com.wzy.loan.core.service.IntegralGradeService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

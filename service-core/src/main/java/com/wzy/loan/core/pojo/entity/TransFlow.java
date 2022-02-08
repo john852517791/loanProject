@@ -1,5 +1,6 @@
-package com.wzy.loan.core.entity;
+package com.wzy.loan.core.pojo.entity;
 
+import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
@@ -13,7 +14,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 用户绑定表
+ * 交易流水表
  * </p>
  *
  * @author john9
@@ -21,8 +22,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="UserBind对象", description="用户绑定表")
-public class UserBind implements Serializable {
+@ApiModel(value="TransFlow对象", description="交易流水表")
+public class TransFlow implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -33,26 +34,23 @@ public class UserBind implements Serializable {
     @ApiModelProperty(value = "用户id")
     private Long userId;
 
-    @ApiModelProperty(value = "用户姓名")
-    private String name;
+    @ApiModelProperty(value = "用户名称")
+    private String userName;
 
-    @ApiModelProperty(value = "身份证号")
-    private String idCard;
+    @ApiModelProperty(value = "交易单号")
+    private String transNo;
 
-    @ApiModelProperty(value = "银行卡号")
-    private String bankNo;
+    @ApiModelProperty(value = "交易类型（1：充值 2：提现 3：投标 4：投资回款 ...）")
+    private Integer transType;
 
-    @ApiModelProperty(value = "银行类型")
-    private String bankType;
+    @ApiModelProperty(value = "交易类型名称")
+    private String transTypeName;
 
-    @ApiModelProperty(value = "手机号")
-    private String mobile;
+    @ApiModelProperty(value = "交易金额")
+    private BigDecimal transAmount;
 
-    @ApiModelProperty(value = "绑定账户协议号")
-    private String bindCode;
-
-    @ApiModelProperty(value = "状态")
-    private Integer status;
+    @ApiModelProperty(value = "备注")
+    private String memo;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;

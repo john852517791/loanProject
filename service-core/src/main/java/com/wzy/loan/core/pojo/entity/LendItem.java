@@ -1,4 +1,4 @@
-package com.wzy.loan.core.entity;
+package com.wzy.loan.core.pojo.entity;
 
 import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.IdType;

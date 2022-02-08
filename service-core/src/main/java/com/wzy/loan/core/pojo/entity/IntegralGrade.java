@@ -1,5 +1,6 @@
-package com.wzy.loan.core.entity;
+package com.wzy.loan.core.pojo.entity;
 
+import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
@@ -13,7 +14,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 借款人上传资源表
+ * 积分等级表
  * </p>
  *
  * @author john9
@@ -21,8 +22,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="BorrowerAttach对象", description="借款人上传资源表")
-public class BorrowerAttach implements Serializable {
+@ApiModel(value="IntegralGrade对象", description="积分等级表")
+public class IntegralGrade implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -30,17 +31,14 @@ public class BorrowerAttach implements Serializable {
       @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty(value = "借款人id")
-    private Long borrowerId;
+    @ApiModelProperty(value = "积分区间开始")
+    private Integer integralStart;
 
-    @ApiModelProperty(value = "图片类型（idCard1：身份证正面，idCard2：身份证反面，house：房产证，car：车）")
-    private String imageType;
+    @ApiModelProperty(value = "积分区间结束")
+    private Integer integralEnd;
 
-    @ApiModelProperty(value = "图片路径")
-    private String imageUrl;
-
-    @ApiModelProperty(value = "图片名称")
-    private String imageName;
+    @ApiModelProperty(value = "借款额度")
+    private BigDecimal borrowAmount;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;

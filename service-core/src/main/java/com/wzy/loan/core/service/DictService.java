@@ -1,11 +1,10 @@
 package com.wzy.loan.core.service;
 
-import com.wzy.loan.core.easyExcel.excelDTO;
-import com.wzy.loan.core.entity.Dict;
+import com.wzy.loan.core.pojo.easyExcel.excelDTO;
+import com.wzy.loan.core.pojo.entity.Dict;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.io.InputStream;
-import java.util.Collection;
 import java.util.List;
 
 /**

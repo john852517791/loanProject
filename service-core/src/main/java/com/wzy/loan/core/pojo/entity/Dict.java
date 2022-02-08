@@ -1,4 +1,4 @@
-package com.wzy.loan.core.entity;
+package com.wzy.loan.core.pojo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -13,7 +15,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 用户积分记录表
+ * 数据字典
  * </p>
  *
  * @author john9
@@ -21,23 +23,26 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="UserIntegral对象", description="用户积分记录表")
-public class UserIntegral implements Serializable {
+@ApiModel(value="Dict对象", description="数据字典")
+public class Dict implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "编号")
+    @ApiModelProperty(value = "id")
       @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty(value = "用户id")
-    private Long userId;
+    @ApiModelProperty(value = "上级id")
+    private Long parentId;
 
-    @ApiModelProperty(value = "积分")
-    private Integer integral;
+    @ApiModelProperty(value = "名称")
+    private String name;
 
-    @ApiModelProperty(value = "获取积分说明")
-    private String content;
+    @ApiModelProperty(value = "值")
+    private Integer value;
+
+    @ApiModelProperty(value = "编码")
+    private String dictCode;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
@@ -45,10 +50,15 @@ public class UserIntegral implements Serializable {
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
 
-    @ApiModelProperty(value = "逻辑删除(1:已删除，0:未删除)")
+    @ApiModelProperty(value = "删除标记（0:不可用 1:可用）")
     @TableField("is_deleted")
     @TableLogic
     private Boolean deleted;
+
+    @TableField(exist = false)
+//    标明这个字段数据库中不存在，但页面展示需要这个属性
+    private boolean hasChildren;
+
 
 
 }

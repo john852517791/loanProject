@@ -1,6 +1,6 @@
 package com.wzy.loan.core.service;
 
-import com.wzy.loan.core.entity.LendReturn;
+import com.wzy.loan.core.pojo.entity.LendReturn;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

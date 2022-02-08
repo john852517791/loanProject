@@ -1,4 +1,4 @@
-package com.wzy.loan.core.entity;
+package com.wzy.loan.core.pojo.entity;
 
 import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 还款记录表
+ * 标的出借回款记录表
  * </p>
  *
  * @author john9
@@ -23,8 +23,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="LendReturn对象", description="还款记录表")
-public class LendReturn implements Serializable {
+@ApiModel(value="LendItemReturn对象", description="标的出借回款记录表")
+public class LendItemReturn implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,23 +32,20 @@ public class LendReturn implements Serializable {
       @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
+    @ApiModelProperty(value = "标的还款id")
+    private Long lendReturnId;
+
+    @ApiModelProperty(value = "标的项id")
+    private Long lendItemId;
+
     @ApiModelProperty(value = "标的id")
     private Long lendId;
 
-    @ApiModelProperty(value = "借款信息id")
-    private Long borrowInfoId;
+    @ApiModelProperty(value = "出借用户id")
+    private Long investUserId;
 
-    @ApiModelProperty(value = "还款批次号")
-    private String returnNo;
-
-    @ApiModelProperty(value = "借款人用户id")
-    private Long userId;
-
-    @ApiModelProperty(value = "借款金额")
-    private BigDecimal amount;
-
-    @ApiModelProperty(value = "计息本金额")
-    private BigDecimal baseAmount;
+    @ApiModelProperty(value = "出借金额")
+    private BigDecimal investAmount;
 
     @ApiModelProperty(value = "当前的期数")
     private Integer currentPeriod;
@@ -83,10 +80,6 @@ public class LendReturn implements Serializable {
 
     @ApiModelProperty(value = "逾期金额")
     private BigDecimal overdueTotal;
-
-    @ApiModelProperty(value = "是否最后一次还款")
-    @TableField("is_last")
-    private Boolean last;
 
     @ApiModelProperty(value = "状态（0-未归还 1-已归还）")
     private Integer status;

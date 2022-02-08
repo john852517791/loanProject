@@ -1,13 +1,11 @@
 package com.wzy.redisTest;
 
 import com.wzy.loan.core.ServiceCoreApplication;
-import com.wzy.loan.core.entity.Dict;
+import com.wzy.loan.core.pojo.entity.Dict;
 import com.wzy.loan.core.mapper.DictMapper;
-import javafx.application.Application;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 

@@ -1,4 +1,4 @@
-package com.wzy.loan.core.entity;
+package com.wzy.loan.core.pojo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 借款人
+ * 用户绑定表
  * </p>
  *
  * @author john9
@@ -21,8 +21,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="Borrower对象", description="借款人")
-public class Borrower implements Serializable {
+@ApiModel(value="UserBind对象", description="用户绑定表")
+public class UserBind implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -33,47 +33,25 @@ public class Borrower implements Serializable {
     @ApiModelProperty(value = "用户id")
     private Long userId;
 
-    @ApiModelProperty(value = "姓名")
+    @ApiModelProperty(value = "用户姓名")
     private String name;
 
     @ApiModelProperty(value = "身份证号")
     private String idCard;
 
-    @ApiModelProperty(value = "手机")
+    @ApiModelProperty(value = "银行卡号")
+    private String bankNo;
+
+    @ApiModelProperty(value = "银行类型")
+    private String bankType;
+
+    @ApiModelProperty(value = "手机号")
     private String mobile;
 
-    @ApiModelProperty(value = "性别（1：男 0：女）")
-    private Integer sex;
+    @ApiModelProperty(value = "绑定账户协议号")
+    private String bindCode;
 
-    @ApiModelProperty(value = "年龄")
-    private Integer age;
-
-    @ApiModelProperty(value = "学历")
-    private Integer education;
-
-    @ApiModelProperty(value = "是否结婚（1：是 0：否）")
-    @TableField("is_marry")
-    private Boolean marry;
-
-    @ApiModelProperty(value = "行业")
-    private Integer industry;
-
-    @ApiModelProperty(value = "月收入")
-    private Integer income;
-
-    @ApiModelProperty(value = "还款来源")
-    private Integer returnSource;
-
-    @ApiModelProperty(value = "联系人名称")
-    private String contactsName;
-
-    @ApiModelProperty(value = "联系人手机")
-    private String contactsMobile;
-
-    @ApiModelProperty(value = "联系人关系")
-    private Integer contactsRelation;
-
-    @ApiModelProperty(value = "状态（0：未认证，1：认证中， 2：认证通过， -1：认证失败）")
+    @ApiModelProperty(value = "状态")
     private Integer status;
 
     @ApiModelProperty(value = "创建时间")

@@ -1,6 +1,6 @@
 package com.wzy.loan.core.mapper;
 
-import com.wzy.loan.core.entity.LendItem;
+import com.wzy.loan.core.pojo.entity.LendItem;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

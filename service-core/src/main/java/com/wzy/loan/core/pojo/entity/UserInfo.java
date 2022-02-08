@@ -1,4 +1,4 @@
-package com.wzy.loan.core.entity;
+package com.wzy.loan.core.pojo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -25,6 +25,9 @@ import lombok.EqualsAndHashCode;
 public class UserInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    public static final Integer STATUS_NORMAL = 1;
+    public static final Integer STATUS_LOCKED = 0;
+    public static final String DEFAULT_AVATAR = "https://wzy-srb-1305802616.cos.ap-guangzhou.myqcloud.com/chainsawman.jpg";
 
     @ApiModelProperty(value = "编号")
       @TableId(value = "id", type = IdType.AUTO)

@@ -1,6 +1,6 @@
 package com.wzy.loan.core.service.impl;
 
-import com.wzy.loan.core.entity.UserAccount;
+import com.wzy.loan.core.pojo.entity.UserAccount;
 import com.wzy.loan.core.mapper.UserAccountMapper;
 import com.wzy.loan.core.service.UserAccountService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

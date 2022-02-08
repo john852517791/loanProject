@@ -1,5 +1,6 @@
-package com.wzy.loan.core.entity;
+package com.wzy.loan.core.pojo.entity;
 
+import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
@@ -13,7 +14,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 数据字典
+ * 用户账户
  * </p>
  *
  * @author john9
@@ -21,26 +22,23 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="Dict对象", description="数据字典")
-public class Dict implements Serializable {
+@ApiModel(value="UserAccount对象", description="用户账户")
+public class UserAccount implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "id")
+    @ApiModelProperty(value = "编号")
       @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty(value = "上级id")
-    private Long parentId;
+    @ApiModelProperty(value = "用户id")
+    private Long userId;
 
-    @ApiModelProperty(value = "名称")
-    private String name;
+    @ApiModelProperty(value = "帐户可用余额")
+    private BigDecimal amount;
 
-    @ApiModelProperty(value = "值")
-    private Integer value;
-
-    @ApiModelProperty(value = "编码")
-    private String dictCode;
+    @ApiModelProperty(value = "冻结金额")
+    private BigDecimal freezeAmount;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
@@ -48,15 +46,13 @@ public class Dict implements Serializable {
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
 
-    @ApiModelProperty(value = "删除标记（0:不可用 1:可用）")
+    @ApiModelProperty(value = "逻辑删除(1:已删除，0:未删除)")
     @TableField("is_deleted")
     @TableLogic
     private Boolean deleted;
 
-    @TableField(exist = false)
-//    标明这个字段数据库中不存在，但页面展示需要这个属性
-    private boolean hasChildren;
-
+    @ApiModelProperty(value = "版本号")
+    private Integer version;
 
 
 }

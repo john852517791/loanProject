@@ -1,6 +1,6 @@
 package com.wzy.loan.core.service.impl;
 
-import com.wzy.loan.core.entity.TransFlow;
+import com.wzy.loan.core.pojo.entity.TransFlow;
 import com.wzy.loan.core.mapper.TransFlowMapper;
 import com.wzy.loan.core.service.TransFlowService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

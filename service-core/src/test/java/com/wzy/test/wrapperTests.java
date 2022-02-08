@@ -2,7 +2,7 @@ package com.wzy.test;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.wzy.loan.core.entity.Dict;
+import com.wzy.loan.core.pojo.entity.Dict;
 import com.wzy.loan.core.mapper.DictMapper;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;

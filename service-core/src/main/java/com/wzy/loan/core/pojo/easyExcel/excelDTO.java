@@ -1,4 +1,4 @@
-package com.wzy.loan.core.easyExcel;
+package com.wzy.loan.core.pojo.easyExcel;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
