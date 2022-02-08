@@ -1,0 +1,25 @@
+2022-02-04 17:28:22 [INFO ] main StartupInfoLogger.java:55 com.wzy.loan.oss.ServiceCosApplication Starting ServiceCosApplication on DESKTOP-ST9KEV1 with PID 12936 (D:\workspace\loanProject\service-oss\target\classes started by wzy家 in D:\workspace\loanProject)
+2022-02-04 17:28:22 [INFO ] main SpringApplication.java:655 com.wzy.loan.oss.ServiceCosApplication The following profiles are active: dev
+2022-02-04 17:28:25 [INFO ] main StartupInfoLogger.java:61 com.wzy.loan.oss.ServiceCosApplication Started ServiceCosApplication in 4.126 seconds (JVM running for 5.265)
+2022-02-04 19:34:13 [INFO ] main StartupInfoLogger.java:55 com.wzy.loan.oss.ServiceCosApplication Starting ServiceCosApplication on DESKTOP-ST9KEV1 with PID 13256 (D:\workspace\loanProject\service-oss\target\classes started by wzy家 in D:\workspace\loanProject)
+2022-02-04 19:34:13 [INFO ] main SpringApplication.java:655 com.wzy.loan.oss.ServiceCosApplication The following profiles are active: dev
+2022-02-04 19:35:13 [INFO ] main StartupInfoLogger.java:55 com.wzy.loan.oss.ServiceCosApplication Starting ServiceCosApplication on DESKTOP-ST9KEV1 with PID 6624 (D:\workspace\loanProject\service-oss\target\classes started by wzy家 in D:\workspace\loanProject)
+2022-02-04 19:35:13 [INFO ] main SpringApplication.java:655 com.wzy.loan.oss.ServiceCosApplication The following profiles are active: dev
+2022-02-04 19:36:11 [INFO ] main StartupInfoLogger.java:55 com.wzy.loan.oss.ServiceCosApplication Starting ServiceCosApplication on DESKTOP-ST9KEV1 with PID 10920 (D:\workspace\loanProject\service-oss\target\classes started by wzy家 in D:\workspace\loanProject)
+2022-02-04 19:36:11 [INFO ] main SpringApplication.java:655 com.wzy.loan.oss.ServiceCosApplication The following profiles are active: dev
+2022-02-04 19:37:02 [INFO ] main StartupInfoLogger.java:55 com.wzy.loan.oss.ServiceCosApplication Starting ServiceCosApplication on DESKTOP-ST9KEV1 with PID 7552 (D:\workspace\loanProject\service-oss\target\classes started by wzy家 in D:\workspace\loanProject)
+2022-02-04 19:37:02 [INFO ] main SpringApplication.java:655 com.wzy.loan.oss.ServiceCosApplication The following profiles are active: dev
+2022-02-04 19:39:19 [INFO ] main StartupInfoLogger.java:55 com.wzy.loan.oss.ServiceCosApplication Starting ServiceCosApplication on DESKTOP-ST9KEV1 with PID 8240 (D:\workspace\loanProject\service-oss\target\classes started by wzy家 in D:\workspace\loanProject)
+2022-02-04 19:39:19 [INFO ] main SpringApplication.java:655 com.wzy.loan.oss.ServiceCosApplication The following profiles are active: dev
+2022-02-04 19:41:19 [INFO ] main StartupInfoLogger.java:55 com.wzy.loan.oss.ServiceCosApplication Starting ServiceCosApplication on DESKTOP-ST9KEV1 with PID 5428 (D:\workspace\loanProject\service-oss\target\classes started by wzy家 in D:\workspace\loanProject)
+2022-02-04 19:41:19 [INFO ] main SpringApplication.java:655 com.wzy.loan.oss.ServiceCosApplication The following profiles are active: dev
+2022-02-04 19:41:22 [INFO ] main StartupInfoLogger.java:61 com.wzy.loan.oss.ServiceCosApplication Started ServiceCosApplication in 3.634 seconds (JVM running for 4.895)
+2022-02-04 19:54:40 [INFO ] main StartupInfoLogger.java:55 com.wzy.loan.oss.ServiceCosApplication Starting ServiceCosApplication on DESKTOP-ST9KEV1 with PID 6940 (D:\workspace\loanProject\service-oss\target\classes started by wzy家 in D:\workspace\loanProject)
+2022-02-04 19:54:40 [INFO ] main SpringApplication.java:655 com.wzy.loan.oss.ServiceCosApplication The following profiles are active: dev
+2022-02-04 19:54:42 [INFO ] main StartupInfoLogger.java:61 com.wzy.loan.oss.ServiceCosApplication Started ServiceCosApplication in 3.675 seconds (JVM running for 4.827)
+2022-02-04 21:50:55 [INFO ] main StartupInfoLogger.java:55 com.wzy.loan.oss.ServiceCosApplication Starting ServiceCosApplication on DESKTOP-ST9KEV1 with PID 8372 (D:\workspace\loanProject\service-oss\target\classes started by wzy家 in D:\workspace\loanProject)
+2022-02-04 21:50:55 [INFO ] main SpringApplication.java:655 com.wzy.loan.oss.ServiceCosApplication The following profiles are active: dev
+2022-02-04 21:51:02 [INFO ] main StartupInfoLogger.java:61 com.wzy.loan.oss.ServiceCosApplication Started ServiceCosApplication in 8.526 seconds (JVM running for 10.797)
+2022-02-04 21:53:21 [INFO ] main StartupInfoLogger.java:55 com.wzy.loan.oss.ServiceCosApplication Starting ServiceCosApplication on DESKTOP-ST9KEV1 with PID 17220 (D:\workspace\loanProject\service-oss\target\classes started by wzy家 in D:\workspace\loanProject)
+2022-02-04 21:53:21 [INFO ] main SpringApplication.java:655 com.wzy.loan.oss.ServiceCosApplication The following profiles are active: dev
+2022-02-04 21:53:25 [INFO ] main StartupInfoLogger.java:61 com.wzy.loan.oss.ServiceCosApplication Started ServiceCosApplication in 5.79 seconds (JVM running for 7.785)

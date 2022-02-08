@@ -1,0 +1,15 @@
+2022-02-04 17:29:19 [INFO ] main StartupInfoLogger.java:55 com.wzy.loan.core.ServiceCoreApplication Starting ServiceCoreApplication on DESKTOP-ST9KEV1 with PID 800 (D:\workspace\loanProject\service-core\target\classes started by wzy家 in D:\workspace\loanProject)
+2022-02-04 17:29:19 [INFO ] main SpringApplication.java:655 com.wzy.loan.core.ServiceCoreApplication The following profiles are active: dev
+2022-02-04 17:29:24 [INFO ] main StartupInfoLogger.java:61 com.wzy.loan.core.ServiceCoreApplication Started ServiceCoreApplication in 6.277 seconds (JVM running for 7.527)
+2022-02-04 19:34:54 [INFO ] main StartupInfoLogger.java:55 com.wzy.loan.core.ServiceCoreApplication Starting ServiceCoreApplication on DESKTOP-ST9KEV1 with PID 14508 (D:\workspace\loanProject\service-core\target\classes started by wzy家 in D:\workspace\loanProject)
+2022-02-04 19:34:54 [INFO ] main SpringApplication.java:655 com.wzy.loan.core.ServiceCoreApplication The following profiles are active: dev
+2022-02-04 19:34:59 [INFO ] main StartupInfoLogger.java:61 com.wzy.loan.core.ServiceCoreApplication Started ServiceCoreApplication in 5.98 seconds (JVM running for 7.264)
+2022-02-04 19:55:08 [INFO ] main StartupInfoLogger.java:55 com.wzy.loan.core.ServiceCoreApplication Starting ServiceCoreApplication on DESKTOP-ST9KEV1 with PID 8952 (D:\workspace\loanProject\service-core\target\classes started by wzy家 in D:\workspace\loanProject)
+2022-02-04 19:55:08 [INFO ] main SpringApplication.java:655 com.wzy.loan.core.ServiceCoreApplication The following profiles are active: dev
+2022-02-04 19:55:12 [INFO ] main StartupInfoLogger.java:61 com.wzy.loan.core.ServiceCoreApplication Started ServiceCoreApplication in 5.292 seconds (JVM running for 6.409)
+2022-02-04 19:57:21 [INFO ] main StartupInfoLogger.java:55 com.wzy.loan.core.ServiceCoreApplication Starting ServiceCoreApplication on DESKTOP-ST9KEV1 with PID 18200 (D:\workspace\loanProject\service-core\target\classes started by wzy家 in D:\workspace\loanProject)
+2022-02-04 19:57:21 [INFO ] main SpringApplication.java:655 com.wzy.loan.core.ServiceCoreApplication The following profiles are active: dev
+2022-02-04 19:57:26 [INFO ] main StartupInfoLogger.java:61 com.wzy.loan.core.ServiceCoreApplication Started ServiceCoreApplication in 5.823 seconds (JVM running for 6.968)
+2022-02-04 21:50:06 [INFO ] main StartupInfoLogger.java:55 com.wzy.loan.core.ServiceCoreApplication Starting ServiceCoreApplication on DESKTOP-ST9KEV1 with PID 14860 (D:\workspace\loanProject\service-core\target\classes started by wzy家 in D:\workspace\loanProject)
+2022-02-04 21:50:06 [INFO ] main SpringApplication.java:655 com.wzy.loan.core.ServiceCoreApplication The following profiles are active: dev
+2022-02-04 21:50:13 [INFO ] main StartupInfoLogger.java:61 com.wzy.loan.core.ServiceCoreApplication Started ServiceCoreApplication in 8.841 seconds (JVM running for 10.715)

@@ -1,0 +1,3 @@
+2022-02-05 17:09:29 [INFO ] main StartupInfoLogger.java:55 com.wzy.redisTest.test1 Starting test1 on DESKTOP-ST9KEV1 with PID 15568 (started by wzy家 in D:\workspace\loanProject\service-core)
+2022-02-05 17:09:29 [INFO ] main SpringApplication.java:655 com.wzy.redisTest.test1 The following profiles are active: dev
+2022-02-05 17:09:37 [INFO ] main StartupInfoLogger.java:61 com.wzy.redisTest.test1 Started test1 in 8.899 seconds (JVM running for 11.453)
