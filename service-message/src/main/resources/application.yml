@@ -8,10 +8,10 @@ spring:
     name: service-sms #微服务名称
   #spring:
   redis:
-    host: 175.178.1.64
-    port: 6379
+    host: 
+    port: 
     database: 0
-    password: 888888 #默认为空
+    password:  #默认为空
     timeout: 3000ms #最大等待时间，超时则抛出异常，否则请求一直等待
     lettuce:
       pool:
